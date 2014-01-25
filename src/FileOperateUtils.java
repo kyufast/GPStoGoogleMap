@@ -1,4 +1,4 @@
-import java.io.FileInputStream;
+ï»¿import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,12 +8,12 @@ import java.io.OutputStream;
 public class FileOperateUtils {
 
 	/**
-	 * ƒRƒs[Œ³‚ÌƒpƒX[srcPath]‚©‚çƒRƒs[æ‚ÌƒpƒX[destPath]‚Öƒtƒ@ƒCƒ‹‚ÌƒRƒs[ 
-	 * ‚ğs‚¢‚Ü‚·B
-	 * @param srcPath    ƒRƒs[Œ³‚ÌƒpƒX
-	 * @param destPath    ƒRƒs[æ‚ÌƒpƒX
-	 * @param bufferSize    ƒf[ƒ^‚Ì“Ç‚İ‚İƒoƒbƒtƒ@ƒTƒCƒY(KB)‚Å‚·B
-	 * @throws IOException    ‰½‚ç‚©‚Ì“üo—Íˆ——áŠO‚ª”­¶‚µ‚½ê‡
+	 * ã‚³ãƒ”ãƒ¼å…ƒã®ãƒ‘ã‚¹[srcPath]ã‹ã‚‰ã‚³ãƒ”ãƒ¼å…ˆã®ãƒ‘ã‚¹[destPath]ã¸ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚³ãƒ”ãƒ¼ 
+	 * ã‚’è¡Œã„ã¾ã™ã€‚
+	 * @param srcPath    ã‚³ãƒ”ãƒ¼å…ƒã®ãƒ‘ã‚¹
+	 * @param destPath    ã‚³ãƒ”ãƒ¼å…ˆã®ãƒ‘ã‚¹
+	 * @param bufferSize    ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º(KB)ã§ã™ã€‚
+	 * @throws IOException    ä½•ã‚‰ã‹ã®å…¥å‡ºåŠ›å‡¦ç†ä¾‹å¤–ãŒç™ºç”Ÿã—ãŸå ´åˆ
 	 */
 	public static void copyStream(String srcPath, String destPath,
 	    int bufferSize) throws IOException {
@@ -23,12 +23,12 @@ public class FileOperateUtils {
 	}
 
 	/**
-	 * “ü—ÍƒXƒgƒŠ[ƒ€‚©‚ço—ÍƒXƒgƒŠ[ƒ€‚Öƒf[ƒ^‚Ì‘‚«‚İ‚ğs‚¢‚Ü‚·B
-	 * ®AƒRƒs[ˆ—I—¹ŒãA“ü—ÍEo—ÍƒXƒgƒŠ[ƒ€‚ğ•Â‚¶‚Ü‚·B
-	 * @param in    “ü—ÍƒXƒgƒŠ[ƒ€
-	 * @param os    o—ÍƒXƒgƒŠ[ƒ€
-	 * @param bufferSize ƒf[ƒ^‚Ì“Ç‚İ‚İƒoƒbƒtƒ@ƒTƒCƒY(KB)‚Å‚·B
-	 * @throws IOException    ‰½‚ç‚©‚Ì“üo—Íˆ——áŠO‚ª”­¶‚µ‚½ê‡
+	 * å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‹ã‚‰å‡ºåŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã¸ãƒ‡ãƒ¼ã‚¿ã®æ›¸ãè¾¼ã¿ã‚’è¡Œã„ã¾ã™ã€‚
+	 * å°šã€ã‚³ãƒ”ãƒ¼å‡¦ç†çµ‚äº†å¾Œã€å…¥åŠ›ãƒ»å‡ºåŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’é–‰ã˜ã¾ã™ã€‚
+	 * @param in    å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ 
+	 * @param os    å‡ºåŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ 
+	 * @param bufferSize ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º(KB)ã§ã™ã€‚
+	 * @throws IOException    ä½•ã‚‰ã‹ã®å…¥å‡ºåŠ›å‡¦ç†ä¾‹å¤–ãŒç™ºç”Ÿã—ãŸå ´åˆ
 	 */
 	public static void copyStream(InputStream in, OutputStream os,
 	    int bufferSize) throws IOException {

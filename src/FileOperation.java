@@ -1,11 +1,11 @@
-import java.io.File;
+ï»¿import java.io.File;
 
 
 public class FileOperation{
 	
 	public void logToGoogleMap(){
 		File inputfile=null;
-		//ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+		//ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 		FileInputting fileinputting = new FileInputting();
 	}
 	

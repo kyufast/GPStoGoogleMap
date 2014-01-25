@@ -1,4 +1,4 @@
-import java.awt.BorderLayout;
+ï»¿import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -40,10 +40,10 @@ public class FileInputting extends JFrame implements ActionListener{
 	    getContentPane().add(labelPanel, BorderLayout.CENTER);
 	    getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
 	    
-		// TODO ©“®¶¬‚³‚ê‚½ƒRƒ“ƒXƒgƒ‰ƒNƒ^[EƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ãƒ»ã‚¹ã‚¿ãƒ–
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setBounds(10, 10, 300, 200);
-	    this.setTitle("“ü—Íƒtƒ@ƒCƒ‹");
+	    this.setTitle("å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«");
 	    this.setVisible(true);
 	}
 	
@@ -67,9 +67,9 @@ public class FileInputting extends JFrame implements ActionListener{
 	      
 	      
 	    }else if (selected == JFileChooser.CANCEL_OPTION){
-	    	inputljlabel.setText("ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ü‚µ‚½");
+	    	inputljlabel.setText("ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¾ã—ãŸ");
 	    }else if (selected == JFileChooser.ERROR_OPTION){
-	    	inputljlabel.setText("ƒGƒ‰[–”‚ÍæÁ‚µ‚ª‚ ‚è‚Ü‚µ‚½");
+	    	inputljlabel.setText("ã‚¨ãƒ©ãƒ¼åˆã¯å–æ¶ˆã—ãŒã‚ã‚Šã¾ã—ãŸ");
 	    }
 	  }
 	
@@ -144,9 +144,9 @@ public class FileInputting extends JFrame implements ActionListener{
 			  while(str != null){
 				  pw.println(str);
 				  if(str.indexOf("StartArray()")!=-1){
-					  //ƒwƒbƒ_[s
+					  //ãƒ˜ãƒƒãƒ€ãƒ¼è¡Œ
 					  String strcsv = brcsv.readLine();
-					  //“à—e1s–Ú
+					  //å†…å®¹1è¡Œç›®
 					  strcsv = brcsv.readLine();
 					  int i = 0;
 					  while(strcsv != null){

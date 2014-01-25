@@ -1,4 +1,4 @@
-import java.awt.BorderLayout;
+ï»¿import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -30,10 +30,10 @@ public class FileOutputting extends JFrame implements ActionListener{
 	    getContentPane().add(labelPanel, BorderLayout.CENTER);
 	    getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
 	    
-		// TODO ©“®¶¬‚³‚ê‚½ƒRƒ“ƒXƒgƒ‰ƒNƒ^[EƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ãƒ»ã‚¹ã‚¿ãƒ–
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setBounds(10, 10, 300, 200);
-	    this.setTitle("o—Íƒtƒ@ƒCƒ‹");
+	    this.setTitle("å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«");
 //	    this.setVisible(true);
 	}
 
@@ -47,9 +47,9 @@ public class FileOutputting extends JFrame implements ActionListener{
 	      File file = filechooser.getSelectedFile();
 	      outputjlabel.setText(file.getName());
 	    }else if (selected == JFileChooser.CANCEL_OPTION){
-	    	outputjlabel.setText("ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ü‚µ‚½");
+	    	outputjlabel.setText("ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¾ã—ãŸ");
 	    }else if (selected == JFileChooser.ERROR_OPTION){
-	    	outputjlabel.setText("ƒGƒ‰[–”‚ÍæÁ‚µ‚ª‚ ‚è‚Ü‚µ‚½");
+	    	outputjlabel.setText("ã‚¨ãƒ©ãƒ¼åˆã¯å–æ¶ˆã—ãŒã‚ã‚Šã¾ã—ãŸ");
 	    }
 	  }
 	public JLabel getOutPutJLabel(){

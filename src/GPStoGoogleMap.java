@@ -1,5 +1,5 @@
-
-//git‚ÌƒeƒXƒg‚Å‚·
+ï»¿
+//gitã®ãƒ†ã‚¹ãƒˆã§ã™
 public class GPStoGoogleMap {
 	public static void main(String args[]){
 //		FileOperation fileoperation = new FileOperation();
