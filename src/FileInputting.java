@@ -16,155 +16,189 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-public class FileInputting extends JFrame implements ActionListener{
+public class FileInputting extends JFrame implements ActionListener {
 	JLabel inputljlabel;
+	JLabel outputljlabel;
 	File inputfile = null;
+	File outputfile = null;
 	static boolean isok = false;
-	
+
 	public FileInputting() {
-		JButton button = new JButton("file select");
+		JButton inputbutton = new JButton("Input file select");
+		JButton outputbutton = new JButton("Output file select");
 		JButton ok = new JButton("ok");
-	    button.addActionListener(this);
-	    button.addActionListener(new OkButtonAcctionListener());
-	    
-	    JPanel buttonPanel = new JPanel();
-	    	buttonPanel.add(button);
-	    	buttonPanel.add(ok);
+		inputbutton.addActionListener(this);
+		outputbutton.addActionListener(this);
+		ok.addActionListener(this);
 
-	    inputljlabel = new JLabel();
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(inputbutton);
+		buttonPanel.add(outputbutton);
+		buttonPanel.add(ok);
 
-	    JPanel labelPanel = new JPanel();
-	    labelPanel.add(inputljlabel);
+		inputljlabel = new JLabel();
+		outputljlabel = new JLabel();
 
-	    getContentPane().add(labelPanel, BorderLayout.CENTER);
-	    getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
-	    
+		JPanel labelPanel = new JPanel();
+		labelPanel.add(inputljlabel);
+		labelPanel.add(outputljlabel);
+
+		getContentPane().add(labelPanel, BorderLayout.CENTER);
+		getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
+
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setBounds(10, 10, 300, 200);
-	    this.setTitle("入力ファイル");
-	    this.setVisible(true);
+		this.setBounds(10, 10, 300, 200);
+		this.setTitle("ファイル選択");
+		this.setVisible(true);
 	}
-	
-	class OkButtonAcctionListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-        	isok = true;
-        }
-    }
+
 
 	@Override
-	  public void actionPerformed(ActionEvent e){
-	    JFileChooser filechooser = new JFileChooser();
+	public void actionPerformed(ActionEvent e) {
+		String cmdName = e.getActionCommand();
+		System.out.println(cmdName);
+		
+		//入力ファイルの選択
+		if ("Input file select".equals(cmdName)) {
+			JFileChooser filechooser = new JFileChooser();
 
-	    int selected = filechooser.showOpenDialog(this);
-	    if (selected == JFileChooser.APPROVE_OPTION){
-	      inputfile = filechooser.getSelectedFile();
-	      System.out.println(inputfile.getName());
-	      inputljlabel.setText(inputfile.getName());
-	      
-	      calcLogToGoogleMap(inputfile);
-	      
-	      
-	    }else if (selected == JFileChooser.CANCEL_OPTION){
-	    	inputljlabel.setText("キャンセルされました");
-	    }else if (selected == JFileChooser.ERROR_OPTION){
-	    	inputljlabel.setText("エラー又は取消しがありました");
-	    }
-	  }
-	
-	public JLabel getInputName(){
+			int selected = filechooser.showOpenDialog(this);
+			if (selected == JFileChooser.APPROVE_OPTION) {
+				inputfile = filechooser.getSelectedFile();
+				System.out.println("入力ファイルPath:" + inputfile.getAbsolutePath());
+//				System.out.println("入力ファイル:" + inputfile.getName());
+				inputljlabel.setText(inputfile.getName());
+
+				//出力ディレクトリがnullの時出力ディレクトリを入力ディレクトリとする
+				if(outputfile==null){
+					System.out.println(inputfile.getParent());
+				}
+				
+				calcLogToGoogleMap(inputfile);
+
+			} else if (selected == JFileChooser.CANCEL_OPTION) {
+				inputljlabel.setText("キャンセルされました");
+			} else if (selected == JFileChooser.ERROR_OPTION) {
+				inputljlabel.setText("エラー又は取消しがありました");
+			}
+		}else if("Output file select".equals(cmdName)){
+			System.out.println("Output file select is clicked");
+			JFileChooser filechooser = new JFileChooser();
+			filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			int selected = filechooser.showOpenDialog(this);
+			if (selected == JFileChooser.APPROVE_OPTION) {
+				outputfile = filechooser.getSelectedFile();
+				System.out.println("出力ファイルPath:" + outputfile.getAbsolutePath());
+//				System.out.println("出力ファイル:" + inputfile.getName());
+				outputljlabel.setText(outputfile.getAbsolutePath());
+
+			} else if (selected == JFileChooser.CANCEL_OPTION) {
+				outputljlabel.setText("キャンセルされました");
+			} else if (selected == JFileChooser.ERROR_OPTION) {
+				outputljlabel.setText("エラー又は取消しがありました");
+			}
+		}else if("ok".equals(cmdName)){
+			System.out.println("ok Clicked");
+		}
+	}
+
+	public JLabel getInputName() {
 		return inputljlabel;
 	}
-	public File getinputfile(){
-//		if(checkBeforeReadfile(inputfile)){
-//				return null;
-//		}
+
+	public File getinputfile() {
+		// if(checkBeforeReadfile(inputfile)){
+		// return null;
+		// }
 		return inputfile;
 	}
-	
-	public static boolean getisok(){
+
+	public static boolean getisok() {
 		return isok;
 	}
-	private static boolean checkBeforeReadfile(File file){
-		  if(file==null){
-			  return false;
-		  }
-		    if (file.exists()){
-		      if (file.isFile() && file.canRead()){
-		    	System.out.println("true");
-		        return true;
-		      }
-		    }
-		    System.out.println("false");
-		    return false;
-		  }
-	
-	public void calcLogToGoogleMap(File inputfile){
-		String filename = inputfile.getName();
+
+	private static boolean checkBeforeReadfile(File file) {
+		if (file == null) {
+			return false;
+		}
+		if (file.exists()) {
+			if (file.isFile() && file.canRead()) {
+				System.out.println("true");
+				return true;
+			}
+		}
+		System.out.println("false");
+		return false;
+	}
+
+	public void calcLogToGoogleMap(File inputfile) {
+		String filename = inputfile.getAbsolutePath();
 		String filenames[] = filename.split("\\.");
-		File outputfile = new File(filenames[0]+"_output.csv");
-		try{
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(outputfile)));
+		File outputfile = new File(filenames[0] + "_output.csv");
+		try {
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
+					outputfile)));
 			BufferedReader br = new BufferedReader(new FileReader(inputfile));
-			
+
 			String str = br.readLine();
-			  while(str != null){
-				  String[] contents = str.split(",");
-				  pw.println(contents[0]+","+contents[1]+","+contents[2]);
-			    str = br.readLine();
-			  }
+			while (str != null) {
+				String[] contents = str.split(",");
+				pw.println(contents[0] + "," + contents[1] + "," + contents[2]);
+				str = br.readLine();
+			}
 
-			  br.close();
-			  pw.close();
-			  
+			br.close();
+			pw.close();
 
-	        csvToHTML(outputfile);
-		}catch(FileNotFoundException e){
+			csvToHTML(outputfile);
+		} catch (FileNotFoundException e) {
 			System.out.println(e);
-		}catch(IOException e){
+		} catch (IOException e) {
 			System.out.println(e);
 		}
 	}
-	
-	
-	public void csvToHTML(File csvfile){
-		String filename = csvfile.getName();
-		String filenames[] = filename.split("\\.");
-		File outputfile = new File(filenames[0]+".html");
-		
-		
-	    try {
-	    	
-	    	PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(outputfile)));
-			BufferedReader br = new BufferedReader(new FileReader("gpssample.html"));
-			BufferedReader brcsv = new BufferedReader(new FileReader(inputfile));
-			
-			String str = br.readLine();
-			  while(str != null){
-				  pw.println(str);
-				  if(str.indexOf("StartArray()")!=-1){
-					  //ヘッダー行
-					  String strcsv = brcsv.readLine();
-					  //内容1行目
-					  strcsv = brcsv.readLine();
-					  int i = 0;
-					  while(strcsv != null){
-						  String[] contents = strcsv.split(",");
-						  pw.println("patharray["+i+"] = new google.maps.LatLng("+contents[1]+","+ contents[2]+");");
-						  i++;
-						  strcsv = brcsv.readLine();
-					  }
-					  brcsv.close();
-				  }
-			    str = br.readLine();
-			  }
 
-			  br.close();
-			  pw.close();
-	        
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+	public void csvToHTML(File csvfile) {
+		String filename = csvfile.getAbsolutePath();
+		String filenames[] = filename.split("\\.");
+		File outputfile = new File(filenames[0] + ".html");
+
+		try {
+
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
+					outputfile)));
+			BufferedReader br = new BufferedReader(new FileReader(
+					"gpssample.html"));
+			BufferedReader brcsv = new BufferedReader(new FileReader(inputfile));
+
+			String str = br.readLine();
+			while (str != null) {
+				pw.println(str);
+				if (str.indexOf("StartArray()") != -1) {
+					// ヘッダー行
+					String strcsv = brcsv.readLine();
+					// 内容1行目
+					strcsv = brcsv.readLine();
+					int i = 0;
+					while (strcsv != null) {
+						String[] contents = strcsv.split(",");
+						pw.println("patharray[" + i
+								+ "] = new google.maps.LatLng(" + contents[1]
+								+ "," + contents[2] + ");");
+						i++;
+						strcsv = brcsv.readLine();
+					}
+					brcsv.close();
+				}
+				str = br.readLine();
+			}
+
+			br.close();
+			pw.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
