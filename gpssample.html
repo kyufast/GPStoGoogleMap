@@ -16,10 +16,10 @@
 
     var map;
     
-    // ‰Šú‰»Bbody‚Ìonload‚Åinit()‚ğw’è‚·‚é‚±‚Æ‚ÅŒÄ‚Ño‚µ‚Ä‚Ü‚·
+    // åˆæœŸåŒ–ã€‚bodyã®onloadã§init()ã‚’æŒ‡å®šã™ã‚‹ã“ã¨ã§å‘¼ã³å‡ºã—ã¦ã¾ã™
     function init() {
 
-      // Google Map‚Å—˜—p‚·‚é‰Šúİ’è—p‚Ì•Ï”
+      // Google Mapã§åˆ©ç”¨ã™ã‚‹åˆæœŸè¨­å®šç”¨ã®å¤‰æ•°
       var latlng = new google.maps.LatLng(39, 138);
       var opts = {
         zoom: 6,
@@ -27,19 +27,19 @@
         center: latlng
       };
 
-      // getElementById("map")‚Ì"map"‚ÍAbody“à‚Ì<div id="map">‚æ‚è
+      // getElementById("map")ã®"map"ã¯ã€bodyå†…ã®<div id="map">ã‚ˆã‚Š
       map = new google.maps.Map(document.getElementById("map"), opts);
 
-	  
+    
       var patharray = new Array();
       //StartArray()
 
-      // Polyline‚Ì‰Šúİ’è
+      // Polylineã®åˆæœŸè¨­å®š
       var polylineOpts = {
         map: map,
         path: patharray
       };
-      // ’¼‘O‚Åì¬‚µ‚½PolylineOptions‚ğ—˜—p‚µ‚ÄPolyline‚ğì¬
+      // ç›´å‰ã§ä½œæˆã—ãŸPolylineOptionsã‚’åˆ©ç”¨ã—ã¦Polylineã‚’ä½œæˆ
       var polyline = new google.maps.Polyline(polylineOpts);
     }
 

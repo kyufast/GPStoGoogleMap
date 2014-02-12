@@ -16,14 +16,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class FileInputting extends JFrame implements ActionListener {
+public class FileIOWindow extends JFrame implements ActionListener {
 	JLabel inputljlabel;
 	JLabel outputljlabel;
 	File inputfile = null;
 	File outputfile = null;
 	static boolean isok = false;
 
-	public FileInputting() {
+	public FileIOWindow() {
 		JButton inputbutton = new JButton("Input file select");
 		JButton outputbutton = new JButton("Output file select");
 		JButton ok = new JButton("ok");
@@ -46,7 +46,6 @@ public class FileInputting extends JFrame implements ActionListener {
 		getContentPane().add(labelPanel, BorderLayout.CENTER);
 		getContentPane().add(buttonPanel, BorderLayout.PAGE_END);
 
-		// TODO 自動生成されたコンストラクター・スタブ
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(10, 10, 350, 200);
 		this.setTitle("ファイル選択");
