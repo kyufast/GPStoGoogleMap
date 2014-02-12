@@ -147,7 +147,7 @@ public class FileInputting extends JFrame implements ActionListener {
 			String str = br.readLine();
 			while (str != null) {
 				String[] contents = str.split(",");
-				pw.println(contents[0] + "," + contents[1] + "," + contents[2]);
+				pw.println(contents[0] + "," + contents[1] + "," + contents[2]+","+contents[6]);
 				str = br.readLine();
 			}
 
