@@ -48,18 +48,17 @@ public class FileInputting extends JFrame implements ActionListener {
 
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(10, 10, 300, 200);
+		this.setBounds(10, 10, 350, 200);
 		this.setTitle("ファイル選択");
 		this.setVisible(true);
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmdName = e.getActionCommand();
 		System.out.println(cmdName);
-		
-		//入力ファイルの選択
+
+		// 入力ファイルの選択
 		if ("Input file select".equals(cmdName)) {
 			JFileChooser filechooser = new JFileChooser();
 
@@ -67,39 +66,38 @@ public class FileInputting extends JFrame implements ActionListener {
 			if (selected == JFileChooser.APPROVE_OPTION) {
 				inputfile = filechooser.getSelectedFile();
 				System.out.println("入力ファイルPath:" + inputfile.getAbsolutePath());
-//				System.out.println("入力ファイル:" + inputfile.getName());
+				// System.out.println("入力ファイル:" + inputfile.getName());
 				inputljlabel.setText(inputfile.getName());
-
-				//出力ディレクトリがnullの時出力ディレクトリを入力ディレクトリとする
-				if(outputfile==null){
-					System.out.println(inputfile.getParent());
-				}
-				
-				calcLogToGoogleMap(inputfile);
-
 			} else if (selected == JFileChooser.CANCEL_OPTION) {
 				inputljlabel.setText("キャンセルされました");
 			} else if (selected == JFileChooser.ERROR_OPTION) {
 				inputljlabel.setText("エラー又は取消しがありました");
 			}
-		}else if("Output file select".equals(cmdName)){
+		} else if ("Output file select".equals(cmdName)) {
 			System.out.println("Output file select is clicked");
 			JFileChooser filechooser = new JFileChooser();
 			filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			int selected = filechooser.showOpenDialog(this);
 			if (selected == JFileChooser.APPROVE_OPTION) {
 				outputfile = filechooser.getSelectedFile();
-				System.out.println("出力ファイルPath:" + outputfile.getAbsolutePath());
-//				System.out.println("出力ファイル:" + inputfile.getName());
+				System.out
+						.println("出力ファイルPath:" + outputfile.getAbsolutePath());
+				// System.out.println("出力ファイル:" + inputfile.getName());
 				outputljlabel.setText(outputfile.getAbsolutePath());
-
 			} else if (selected == JFileChooser.CANCEL_OPTION) {
 				outputljlabel.setText("キャンセルされました");
 			} else if (selected == JFileChooser.ERROR_OPTION) {
 				outputljlabel.setText("エラー又は取消しがありました");
 			}
-		}else if("ok".equals(cmdName)){
+		} else if ("ok".equals(cmdName)) {
 			System.out.println("ok Clicked");
+			if(inputfile == null && outputfile == null){
+				inputljlabel.setText("入力ファイルを選択してください");
+			}else if (inputfile != null && outputfile == null) {
+				calcLogToGoogleMap(inputfile);
+			}else if(inputfile != null && outputfile != null){
+				calcLogToGoogleMap(inputfile,outputfile.getAbsoluteFile().toString());
+			}
 		}
 	}
 
@@ -133,9 +131,14 @@ public class FileInputting extends JFrame implements ActionListener {
 	}
 
 	public void calcLogToGoogleMap(File inputfile) {
-		String filename = inputfile.getAbsolutePath();
+		calcLogToGoogleMap(inputfile, inputfile.getParent());
+	}
+
+	public void calcLogToGoogleMap(File inputfile, String outputDirectory) {
+		String filename = inputfile.getName();
 		String filenames[] = filename.split("\\.");
-		File outputfile = new File(filenames[0] + "_output.csv");
+		File outputfile = new File(outputDirectory + "\\" + filenames[0]
+				+ "_output.csv");
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
 					outputfile)));
