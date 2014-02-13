@@ -90,12 +90,13 @@ public class FileIOWindow extends JFrame implements ActionListener {
 			}
 		} else if ("ok".equals(cmdName)) {
 			System.out.println("ok Clicked");
-			if(inputfile == null && outputfile == null){
+			if (inputfile == null && outputfile == null) {
 				inputljlabel.setText("入力ファイルを選択してください");
-			}else if (inputfile != null && outputfile == null) {
+			} else if (inputfile != null && outputfile == null) {
 				calcLogToGoogleMap(inputfile);
-			}else if(inputfile != null && outputfile != null){
-				calcLogToGoogleMap(inputfile,outputfile.getAbsoluteFile().toString());
+			} else if (inputfile != null && outputfile != null) {
+				calcLogToGoogleMap(inputfile, outputfile.getAbsoluteFile()
+						.toString());
 			}
 		}
 	}
@@ -146,7 +147,8 @@ public class FileIOWindow extends JFrame implements ActionListener {
 			String str = br.readLine();
 			while (str != null) {
 				String[] contents = str.split(",");
-				pw.println(contents[0] + "," + contents[1] + "," + contents[2]+","+contents[6]);
+				pw.println(contents[0] + "," + contents[1] + "," + contents[2]
+						+ "," + contents[6]);
 				str = br.readLine();
 			}
 
@@ -154,6 +156,7 @@ public class FileIOWindow extends JFrame implements ActionListener {
 			pw.close();
 
 			csvToHTML(outputfile);
+			csvToHTMLGraph(outputfile);
 		} catch (FileNotFoundException e) {
 			System.out.println(e);
 		} catch (IOException e) {
@@ -202,5 +205,92 @@ public class FileIOWindow extends JFrame implements ActionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void csvToHTMLGraph(File csvfile) {
+		String filename = csvfile.getAbsolutePath();
+		String filenames[] = filename.split("\\.");
+		File outputfile = new File(filenames[0] + "_Graph" + ".html");
+
+		int csvline;
+
+		try {
+
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(
+					outputfile)));
+			BufferedReader br = new BufferedReader(new FileReader("Graph.html"));
+
+			// csvファイルの行数をカウント
+			{
+				BufferedReader brcsv = new BufferedReader(new FileReader(
+						inputfile));
+				// ヘッダー行
+				String strcsv = brcsv.readLine();
+				// 内容1行目
+				strcsv = brcsv.readLine();
+				csvline = 0;
+				while (strcsv != null) {
+					csvline++;
+					strcsv = brcsv.readLine();
+				}
+
+				brcsv.close();
+			}
+
+			String str = br.readLine();
+			while (str != null) {
+				pw.println(str);
+				if (str.indexOf("TimeInput") != -1) {
+					BufferedReader brcsv = new BufferedReader(new FileReader(
+							inputfile));
+					// ヘッダー行
+					String strcsv = brcsv.readLine();
+					// 内容1行目
+					strcsv = brcsv.readLine();
+					while (strcsv != null) {
+						String[] contents = strcsv.split(",");
+						pw.println("<th scope=\"col\">" + contents[0] + "</th>");
+						//長時間記録されてる場合は数を減らす
+						if (csvline < 1000) {
+							strcsv = brcsv.readLine();
+						} else {
+							for(int i=0;i<10;i++){
+								strcsv = brcsv.readLine();
+							}
+						}
+					}
+					brcsv.close();
+				}
+				if (str.indexOf("SpeedInput") != -1) {
+					BufferedReader brcsv = new BufferedReader(new FileReader(
+							inputfile));
+					// ヘッダー行
+					String strcsv = brcsv.readLine();
+					// 内容1行目
+					strcsv = brcsv.readLine();
+					while (strcsv != null) {
+						String[] contents = strcsv.split(",");
+						pw.println("<td>" + contents[6] + "</td>");
+						//長時間記録されてる場合は数を減らす
+						if (csvline < 1000) {
+							strcsv = brcsv.readLine();
+						} else {
+							for(int i=0;i<10;i++){
+								strcsv = brcsv.readLine();
+							}
+						}
+					}
+					brcsv.close();
+				}
+				str = br.readLine();
+			}
+
+			br.close();
+			pw.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
